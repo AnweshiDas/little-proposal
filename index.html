@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#fff8ef">
+  <title>A tiny question for you</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,600;1,700&display=swap');
+    :root{--paper:#fff8ef;--ink:#28211e;--pink:#f6a8a1;--red:#dc584e;--yellow:#f7d875;--muted:#877e77;--line:#eadfd5}
+    *{box-sizing:border-box} body{margin:0;min-height:100svh;background:var(--paper);color:var(--ink);font-family:'DM Sans',sans-serif;overflow-x:hidden}
+    body:before{content:"";position:fixed;inset:0;pointer-events:none;opacity:.18;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.86' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.18'/%3E%3C/svg%3E")}
+    .wrap{min-height:100svh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:26px 18px 34px;position:relative}
+    .topline{width:min(100%,920px);display:flex;justify-content:space-between;align-items:center;margin-bottom:26px;font:11px 'DM Mono',monospace;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+    .stamp{display:flex;align-items:center;gap:8px}.stamp i{width:8px;height:8px;background:#91a783;border-radius:50%;display:inline-block;box-shadow:0 0 0 3px #91a78322}
+    .card{width:min(100%,700px);min-height:590px;background:#fffdf9;border:1px solid #efe5dc;border-radius:5px;box-shadow:0 22px 70px #563b2810,0 3px 8px #563b2808;position:relative;padding:42px 54px 40px;display:flex;flex-direction:column;align-items:center;text-align:center;overflow:hidden}
+    .card:before,.card:after{content:"";position:absolute;width:17px;height:17px;border:1px solid var(--line);border-radius:50%;top:50%;transform:translateY(-50%);background:var(--paper)}.card:before{left:-9px}.card:after{right:-9px}
+    .scribble{position:absolute;color:var(--red);font:italic 14px 'Playfair Display',serif;transform:rotate(-10deg);left:7%;top:14%;opacity:.8}.scribble:after{content:"〰";display:block;font:26px 'DM Sans';transform:rotate(8deg)}
+    .tiny-label{font:11px 'DM Mono',monospace;letter-spacing:.17em;text-transform:uppercase;color:var(--muted);margin-top:0}
+    .heart{width:66px;height:66px;margin:19px 0 14px;display:grid;place-items:center;position:relative;animation:float 3s ease-in-out infinite}.heart svg{width:54px;filter:drop-shadow(0 7px 4px #dc584e20)}
+    @keyframes float{50%{transform:translateY(-7px) rotate(-4deg)}}
+    h1{font:600 clamp(38px,7vw,62px)/1.05 'Playfair Display',serif;letter-spacing:-.045em;margin:0;max-width:540px}
+    h1 em{color:var(--red);font-weight:600}
+    .subtitle{margin:18px 0 22px;color:#726861;font-size:15px;line-height:1.7;max-width:390px}
+    .divider{display:flex;align-items:center;gap:12px;width:100%;max-width:310px;color:#c9bdb2;margin:2px 0 21px}.divider:before,.divider:after{content:"";height:1px;background:var(--line);flex:1}.divider span{font-size:12px}
+    .question{font:italic 600 25px 'Playfair Display',serif;margin:0 0 23px}
+    .buttons{position:relative;display:flex;align-items:center;justify-content:center;gap:14px;min-height:54px;width:100%;max-width:390px}
+    button{font:600 14px 'DM Sans',sans-serif;border:0;border-radius:999px;padding:15px 25px;cursor:pointer;transition:transform .2s,box-shadow .2s,background .2s}
+    #yes{background:var(--red);color:#fff;box-shadow:0 6px 16px #dc584e35}#yes:hover{transform:translateY(-2px);box-shadow:0 10px 20px #dc584e42}
+    #maybe{background:#f4eee8;color:#554c46;position:relative}
+    .footnote{margin-top:auto;padding-top:25px;font:11px 'DM Mono',monospace;color:#aaa098;letter-spacing:.03em}
+    .corner{position:absolute;font-size:20px;color:var(--yellow);right:10%;top:12%;transform:rotate(14deg)}
+    .result{display:none;flex-direction:column;align-items:center;animation:pop .6s cubic-bezier(.18,.9,.28,1.2) both}.result.show{display:flex}
+    @keyframes pop{from{opacity:0;transform:scale(.8) translateY(12px)}to{opacity:1;transform:scale(1) translateY(0)}}
+    .result h2{font:600 clamp(38px,7vw,58px)/1.05 'Playfair Display',serif;letter-spacing:-.04em;margin:0 0 14px}.result h2 em{color:var(--red)}.result p{margin:0;color:#726861;line-height:1.7}
+    .result .big-heart{font-size:55px;margin:7px 0 12px;animation:float 2s ease-in-out infinite}
+    .cat-gif{display:block;width:156px;height:156px;object-fit:cover;border:5px solid white;outline:1px solid var(--line);box-shadow:0 5px 12px #563b2815;margin:18px 0 0;border-radius:3px}
+    .bonus{margin:16px 0 0!important;font:italic 15px 'Playfair Display',serif!important;color:var(--red)!important}
+    .bonus small{display:block;margin-top:5px;font:10px 'DM Mono',monospace;letter-spacing:.08em;text-transform:uppercase;color:#a3988e}
+    .song-player{display:block;width:min(100%,330px);height:80px;border:0;border-radius:12px;margin:10px 0 0}
+    .after{display:none;position:fixed;right:14px;bottom:10px;z-index:4;font:italic 10px 'Playfair Display',serif!important;color:#877e77!important;opacity:.27;margin:0!important;text-align:right;pointer-events:none}
+    .card.answered .after{display:block}
+    .confetti{position:fixed;top:-20px;z-index:5;pointer-events:none;animation:fall linear forwards}
+    @keyframes fall{to{transform:translateY(110vh) rotate(720deg);opacity:.1}}
+    @media(max-width:600px){.wrap{padding:16px 14px 24px}.topline{margin-bottom:14px;font-size:9px}.card{padding:35px 23px 27px;min-height:570px}.scribble{left:7%;top:9%;font-size:12px}.corner{right:8%;top:8%}.subtitle{font-size:14px;margin:15px 0 20px}.question{font-size:23px}.footnote{font-size:9px}.buttons{gap:9px}button{padding:14px 21px}.cat-gif{width:140px;height:140px}.after{right:9px;bottom:8px;font-size:9px!important}.bonus{font-size:14px!important}}
+    @media(prefers-reduced-motion:reduce){*,*:before,*:after{animation-duration:.01ms!important;animation-iteration-count:1!important;scroll-behavior:auto!important}}
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <div class="topline"><span>✳ a very important note</span><span class="stamp"><i></i> sent with love</span></div>
+    <section class="card" aria-live="polite">
+      <span class="scribble">psst...</span><span class="corner">✦</span>
+      <div id="letter">
+        <div class="tiny-label">please read this tiny letter</div>
+        <div class="heart" aria-hidden="true"><svg viewBox="0 0 64 58" fill="none"><path d="M32 54S5 38 5 19C5 2 26-1 32 15 38-1 59 2 59 19c0 19-27 35-27 35Z" fill="#e76d62"/><path d="M14 17c1-5 5-8 10-8" stroke="#fff" stroke-width="3" stroke-linecap="round" opacity=".7"/></svg></div>
+        <h1>I have a <em>question</em><br>for you.</h1>
+        <p class="subtitle">I made you this little corner of the internet because some questions deserve a little extra sparkle.</p>
+        <div class="divider"><span>♥</span></div>
+        <p class="question">Will you be my person?</p>
+        <div class="buttons"><button id="yes">Yes, absolutely! <span>♥</span></button><button id="maybe">Let me think...</button></div>
+      </div>
+      <div id="result" class="result" role="status">
+        <h2>Best answer<br><em>ever.</em></h2>
+        <p>Okay, now I’m smiling like an idiot.<br>This is going to be wonderful. ✨</p>
+        <img class="cat-gif" src="funny-cat.gif" alt="A cat in a funny looping meme GIF" loading="eager">
+        <p class="bonus">Bonus encore: because you deserve a soundtrack. 🎧<small>Stray Kids · CASE 143</small></p>
+        <iframe class="song-player" title="Play CASE 143 by Stray Kids on Spotify" src="https://open.spotify.com/embed/track/3O8G8eVrhfXTGttyQ1xVuq?utm_source=generator&theme=0" loading="lazy" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" referrerpolicy="strict-origin-when-cross-origin"></iframe>
+      </div>
+      <p class="after">P.S. it’s a joke 😏</p>
+      <div class="footnote">made of butterflies &amp; a little bit of courage</div>
+    </section>
+  </main>
+  <script>
+    const yes = document.querySelector('#yes');
+    const maybe = document.querySelector('#maybe');
+    let escapes = 0;
+    maybe.addEventListener('pointerenter', () => {
+      if (escapes < 4 && window.innerWidth > 600) {
+        escapes++;
+        const x = (Math.random() * 90 - 45) + 'px';
+        const y = (Math.random() * 50 - 25) + 'px';
+        maybe.style.transform = `translate(${x},${y})`;
+      }
+    });
+    maybe.addEventListener('click', () => {
+      maybe.textContent = ['Are you sure? 🥺','A little nudge?','The yes button is cute!','Just say yes 💌'][Math.min(escapes++,3)];
+    });
+    yes.addEventListener('click', () => {
+      document.querySelector('#letter').style.display = 'none';
+      document.querySelector('.card').classList.add('answered');
+      document.querySelector('#result').classList.add('show');
+      for (let i=0;i<55;i++) {
+        const el=document.createElement('i'); el.className='confetti';
+        el.textContent=['♥','✦','✿','♡'][Math.floor(Math.random()*4)];
+        el.style.left=Math.random()*100+'vw'; el.style.color=['#dc584e','#f2bd55','#91a783','#d98ba0'][Math.floor(Math.random()*4)];
+        el.style.fontSize=(10+Math.random()*15)+'px'; el.style.animationDuration=(2.5+Math.random()*3)+'s';
+        document.body.appendChild(el); setTimeout(()=>el.remove(),6000);
+      }
+    });
+  </script>
+</body>
+</html>
