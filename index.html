@@ -34,10 +34,11 @@
     @keyframes pop{from{opacity:0;transform:scale(.8) translateY(12px)}to{opacity:1;transform:scale(1) translateY(0)}}
     .result h2{font:600 clamp(38px,7vw,58px)/1.05 'Playfair Display',serif;letter-spacing:-.04em;margin:0 0 14px}.result h2 em{color:var(--red)}.result p{margin:0;color:#726861;line-height:1.7}
     .result .big-heart{font-size:55px;margin:7px 0 12px;animation:float 2s ease-in-out infinite}
-    .cat-gif{display:block;width:156px;height:156px;object-fit:cover;border:5px solid white;outline:1px solid var(--line);box-shadow:0 5px 12px #563b2815;margin:18px 0 0;border-radius:3px}
-    .bonus{margin:16px 0 0!important;font:italic 15px 'Playfair Display',serif!important;color:var(--red)!important}
+    .cat-gif{display:block;width:156px;height:156px;object-fit:cover;border:5px solid white;outline:1px solid var(--line);box-shadow:0 5px 12px #563b2815;margin:12px 0 0;border-radius:3px}
+    .bonus-panel{width:min(100%,350px);margin:10px 0 0;padding:12px 13px 10px;background:#fff3f1;border:1px solid #f1dfdc;border-radius:14px;box-shadow:0 5px 15px #563b2809}
+    .bonus{margin:0!important;font:italic 15px 'Playfair Display',serif!important;color:var(--red)!important}
     .bonus small{display:block;margin-top:5px;font:10px 'DM Mono',monospace;letter-spacing:.08em;text-transform:uppercase;color:#a3988e}
-    .song-player{display:block;width:min(100%,330px);height:80px;border:0;border-radius:12px;margin:10px 0 0}
+    .song-player{display:block;width:100%;height:80px;border:0;border-radius:12px;margin:9px 0 0}
     .after{display:none;position:fixed;right:14px;bottom:10px;z-index:4;font:italic 10px 'Playfair Display',serif!important;color:#877e77!important;opacity:.27;margin:0!important;text-align:right;pointer-events:none}
     .card.answered .after{display:block}
     .confetti{position:fixed;top:-20px;z-index:5;pointer-events:none;animation:fall linear forwards}
@@ -64,8 +65,10 @@
         <h2>Best answer<br><em>ever.</em></h2>
         <p>Okay, now I’m smiling like an idiot.<br>This is going to be wonderful. ✨</p>
         <img class="cat-gif" src="funny-cat.gif" alt="A cat in a funny looping meme GIF" loading="eager">
-        <p class="bonus">Bonus encore: because you deserve a soundtrack. 🎧<small>Stray Kids · CASE 143</small></p>
-        <iframe class="song-player" title="Play CASE 143 by Stray Kids on Spotify" src="https://open.spotify.com/embed/track/3O8G8eVrhfXTGttyQ1xVuq?utm_source=generator&theme=0" loading="lazy" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" referrerpolicy="strict-origin-when-cross-origin"></iframe>
+        <div class="bonus-panel">
+          <p class="bonus">Bonus encore: because you deserve a soundtrack. 🎧<small>Stray Kids · CASE 143</small></p>
+          <iframe class="song-player" title="Play CASE 143 by Stray Kids on Spotify" src="https://open.spotify.com/embed/track/3O8G8eVrhfXTGttyQ1xVuq?utm_source=generator&theme=0" loading="lazy" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" referrerpolicy="strict-origin-when-cross-origin"></iframe>
+        </div>
       </div>
       <p class="after">P.S. it’s a joke 😏</p>
       <div class="footnote">made of butterflies &amp; a little bit of courage</div>
